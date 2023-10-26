@@ -1,0 +1,59 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: udemyapiplatform-app
+    build:
+      target: dev
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        USERID: $USERID
+    environment:
+      XDEBUG_CLIENT_HOST: 172.17.0.1
+      XDEBUG_CLIENT_PORT: 3050
+      PHP_IDE_CONFIG: serverName=Docker
+    networks:
+      - udemyapiplatform_network
+    volumes:
+      - ./:/appdata/www
+
+  web:
+    container_name: udemyapiplatform-web
+    build:
+      target: dev
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - '8009:80'
+    volumes:
+      - ./:/appdata/www
+    links:
+      - app
+    networks:
+      - udemyapiplatform_network
+    depends_on:
+      - app
+
+  db:
+    container_name: udemyapiplatform-postgres
+    image: postgres:16.0-alpine3.18
+    ports:
+      - '5436:5432'
+    environment:
+      POSTGRES_USER: mario
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: apiplatform
+      TZ: 'America/La_Paz'
+      PGTZ: 'America/La_Paz'
+
+    volumes:
+      - udemyapiplatform-pgsql-data:/var/lib/postgresql/data
+    networks:
+      - udemyapiplatform_network
+
+networks:
+  udemyapiplatform_network:
+
+volumes:
+  udemyapiplatform-pgsql-data:
