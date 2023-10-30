@@ -1,10 +1,15 @@
 version: '3.5'
 
+networks:
+  udemyapiplatform-network:
+    external: true
+
 services:
   rabbit:
-    container_name: symfony-api-platform-rabbitmq
+    container_name: ${DOCKER_NAME}-rabbitmq
     build:
-      context: ./docker
+      context: .
+      dockerfile: docker/Dockerfile
       args:
         UID: $U_ID
     volumes:
@@ -13,8 +18,4 @@ services:
       - 5672:5672
       - 15672:15672
     networks:
-      - symfony-api-platform-network
-
-networks:
-  symfony-api-platform-network:
-    external: true
+      - udemyapiplatform-network

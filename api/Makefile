@@ -1,6 +1,7 @@
 #!/bin/bash
 
 UID = $(shell id -u)
+CONTAINER_PREFIX = udemyapiplatform
 DOCKER_BE = udemyapiplatform-app
 
 help: ## Show this help message
@@ -14,6 +15,7 @@ build: ## Rebuilds all the containers
 	USERID=${UID} docker-compose build
 
 up: ## Up the containers
+	docker network create ${CONTAINER_PREFIX}-network || true
 	USERID=${UID} docker-compose up -d
 
 stop: ## Stop the containers

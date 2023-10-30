@@ -1,4 +1,4 @@
-FROM rabbitmq:3-management
+FROM rabbitmq:3.12-management
 
 ARG UID
 EXPOSE $UID
