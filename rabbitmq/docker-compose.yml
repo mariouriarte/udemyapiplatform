@@ -6,7 +6,7 @@ networks:
 
 services:
   rabbit:
-    container_name: ${DOCKER_NAME}-rabbitmq
+    container_name: udemyapiplatform-rabbitmq
     build:
       context: .
       dockerfile: docker/Dockerfile
