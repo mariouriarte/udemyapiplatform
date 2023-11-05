@@ -91,4 +91,4 @@ COPY docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # cambio de puerto de php-fpm
 RUN sed -i 's/9000/9050/' /usr/local/etc/php-fpm.d/zz-docker.conf
-EXPOSE 3001
+EXPOSE 9050
