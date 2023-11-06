@@ -13,8 +13,24 @@
         <field name="token" length="100" nullable="true"/>
         <field name="resetPasswordToken" length="100" nullable="true"/>
         <field name="active" type="boolean"/>
-        <field name="createdAt" type="datetime"/>
-        <field name="updatedAt" type="datetime"/>
+        <field name="createdAt" type="datetime">
+            <options>
+                <option name="default">now()</option>
+            </options>
+        </field>
+        <field name="updatedAt" type="datetime">
+            <options>
+                <option name="default">now()</option>
+            </options>
+        </field>
+
+        <unique-constraints>
+            <unique-constraint columns="email" name="u_user_email" />
+        </unique-constraints>
+
+        <indexes>
+            <index columns="name" name="idx_user_name"/>
+        </indexes>
 
         <lifecycle-callbacks>
             <lifecycle-callback type="preUpdate" method="setUpdatedAt"/>
