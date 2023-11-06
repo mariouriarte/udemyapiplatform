@@ -1,4 +1,5 @@
 #!/bin/bash
+include .env
 
 UID = $(shell id -u)
 DOCKER_BE = udemyapiplatform-app
@@ -35,3 +36,8 @@ composer-install: ## Installs composer dependencies
 
 migrations: ## Runs the migrations
 	USERID=${UID} docker exec --user ${UID} -it ${DOCKER_BE} bin/console doctrine:migrations:migrate -n
+
+generate-ssh-keys: ## generate ssh keys
+	USERID=${UID} docker exec --user ${UID} -it ${DOCKER_BE} mkdir -p config/jwt
+	USERID=${UID} docker exec --user ${UID} -it ${DOCKER_BE} openssl genrsa -passout pass:${JWT_PASSPHRASE} -out config/jwt/private.pem -aes256 4096
+	USERID=${UID} docker exec --user ${UID} -it ${DOCKER_BE} openssl rsa -pubout -passin pass:${JWT_PASSPHRASE} -in config/jwt/private.pem -out config/jwt/public.pem
