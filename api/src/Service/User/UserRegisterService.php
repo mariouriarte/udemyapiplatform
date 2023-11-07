@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\User;
 
 use App\Entity\UserAccountant;
+use App\Exceptions\User\UserAccountantAlreadyExistException;
 use App\Repository\UserAccountantRepository;
 use App\Service\Password\EncoderService;
 use App\Service\Request\RequestService;
@@ -28,12 +29,12 @@ class UserRegisterService
 
         $user->setPassword($this->encoderService->generateEncoderPassword($user, $password));
 
-//        try {
+        try {
             $this->userRepository->save($user);
-//        } catch (\Exception $e) {
+        } catch (\Exception $e) {
 //            echo($e->getMessage());
-////            throw UserAlreadyExistException::fromEmail($email);
-//        }
+            throw UserAccountantAlreadyExistException::fromEmail($email);
+        }
 
         return $user;
     }
