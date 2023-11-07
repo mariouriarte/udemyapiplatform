@@ -37,7 +37,7 @@ services:
 
   db:
     container_name: udemyapiplatform-postgres
-    image: postgres:16.0-alpine3.18
+    image: postgres:15.0-alpine
     ports:
       - '5436:5432'
     environment:

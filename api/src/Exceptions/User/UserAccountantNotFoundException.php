@@ -4,7 +4,7 @@ namespace App\Exceptions\User;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UserNotFoundException extends NotFoundHttpException
+class UserAccountantNotFoundException extends NotFoundHttpException
 {
     private const MSG = 'User with email %s not found';
 

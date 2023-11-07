@@ -12,16 +12,16 @@ class JsonExceptionResponseTransformerListener
 {
     public function onKernelException(ExceptionEvent $event): void
     {
-        $exception = $event->getThrowable();
-        if ($exception instanceof HttpExceptionInterface) {
-            $data = [
-                'class' => \get_class($exception),
-                'code'=> $exception->getStatusCode(),
-                'message' => $exception->getMessage()
-            ];
-
-            $event->setResponse($this->prepareResponse($data));
-        }
+//        $exception = $event->getThrowable();
+//        if ($exception instanceof HttpExceptionInterface) {
+//            $data = [
+//                'class' => \get_class($exception),
+//                'code'=> $exception->getStatusCode(),
+//                'message' => $exception->getMessage()
+//            ];
+//
+//            $event->setResponse($this->prepareResponse($data));
+//        }
     }
 
     private function prepareResponse(array $data): JsonResponse

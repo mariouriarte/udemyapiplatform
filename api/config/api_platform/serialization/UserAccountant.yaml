@@ -1,8 +1,8 @@
-App\Entity\User:
+App\Entity\UserAccountant:
   attributes:
     id:
       groups: [user_read]
-    name:
+    names:
       groups: [user_read, user_post]
     email:
       groups: [user_read, user_post]

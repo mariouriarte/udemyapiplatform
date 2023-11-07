@@ -6,9 +6,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class UserAccountant implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    private ?string $name;
+    private ?string $names;
 
     private ?string $email;
 
@@ -28,10 +28,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $id;
 
-    public function __construct(string $name, string $email)
+    public function __construct(string $names, string $email)
     {
         $this->id = Uuid::v4()->toRfc4122();
-        $this->name = $name;
+        $this->names = $names;
         $this->setEmail($email);
         $this->token = \sha1(uniqid());
         $this->active = false;
@@ -39,14 +39,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->setUpdatedAt();
     }
 
-    public function getName(): ?string
+    public function getNames(): ?string
     {
-        return $this->name;
+        return $this->names;
     }
 
-    public function setName(string $name): static
+    public function setNames(string $names): static
     {
-        $this->name = trim($name);
+        $this->names = trim($names);
 
         return $this;
     }

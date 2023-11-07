@@ -1,5 +1,6 @@
 controllers:
     resource:
-        path: ../src/Controller/
+        path: ../src/Controller/Action
         namespace: App\Controller\Actions
     type: attribute
+    prefix: v1

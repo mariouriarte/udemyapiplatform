@@ -3,12 +3,12 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-    <entity name="App\Entity\User" repository-class="App\Repository\UserRepository">
+    <entity name="App\Entity\UserAccountant" repository-class="App\Repository\UserAccountantRepository">
 
         <id name="id" type="string" length="36" column-definition="VARCHAR(36) NOT NULL"/>
-        <field name="name" length="255"/>
+        <field name="names" length="255"/>
         <field name="email" length="100"/>
-        <field name="password" length="50"/>
+        <field name="password" length="100"/>
         <field name="avatar" length="255" nullable="true"/>
         <field name="token" length="100" nullable="true"/>
         <field name="resetPasswordToken" length="100" nullable="true"/>
@@ -29,7 +29,7 @@
         </unique-constraints>
 
         <indexes>
-            <index columns="name" name="idx_user_name"/>
+            <index columns="names" name="idx_user_names"/>
         </indexes>
 
         <lifecycle-callbacks>

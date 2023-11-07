@@ -1,0 +1,32 @@
+App\Entity\UserAccountant:
+  normalizationContext:
+    groups: [ 'user_read' ]
+  denormalizationContext:
+    groups: [ 'user_read' ]
+  operations:
+    ApiPlatform\Metadata\Post:
+      uriTemplate: '/user_accountants/register'
+      controller: App\Controller\Action\User\Register
+      denormalizationContext:
+        groups: [ 'user_post' ]
+      openapi_context:
+        summary: Register a new user
+    ApiPlatform\Metadata\GetCollection: ~ # nothing more to add if we want to keep the default controller
+    ApiPlatform\Metadata\Get: ~
+
+
+#  attributes:
+#    normalization_context:
+#      groups: [user_read]
+##  collectionOperations:
+##    register:
+##      method: POST
+##      path: /users/register
+##      controller: App\Controller\Action\User\Register
+##      denormalization_context:
+##        groups: [user_register]
+##      openapi_context:
+##        summary: Register a new user
+#  itemOperations:
+#    get:
+#      method: GET
