@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  mailer-app:
+    container_name: udemyapiplatform-mailer
+    build:
+      target: dev
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        USERID: $USERID
+    environment:
+      XDEBUG_CLIENT_HOST: 172.17.0.1
+      XDEBUG_CLIENT_PORT: 9051
+      PHP_IDE_CONFIG: serverName=Docker
+    networks:
+      - udemyapiplatform-network
+    volumes:
+      - ./:/appdata/www
+
+  mailer-db:
+    container_name: udemyapiplatform-mailer-postgres
+    image: postgres:15.0-alpine
+    ports:
+      - '5437:5432'
+    environment:
+      POSTGRES_USER: mailer
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mailerdb
+      TZ: 'America/La_Paz'
+      PGTZ: 'America/La_Paz'
+    volumes:
+      - udemyapiplatform-mailer-pgsql-data:/var/lib/postgresql/data
+    networks:
+      - udemyapiplatform-network
+
+networks:
+  udemyapiplatform-network:
+    external: true
+
+volumes:
+  udemyapiplatform-mailer-pgsql-data:
