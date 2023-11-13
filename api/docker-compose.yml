@@ -19,7 +19,7 @@ services:
       - ./:/appdata/www
 
   web:
-    container_name: udemyapiplatform-web
+    container_name: udemyapizplatform-web
     build:
       target: dev
       context: .
@@ -37,7 +37,7 @@ services:
 
   db:
     container_name: udemyapiplatform-postgres
-    image: postgres:15.0-alpine
+    image: postgres:16.0-alpine
     ports:
       - '5436:5432'
     environment:
